@@ -20,7 +20,7 @@ async function bootstrap() {
   app.useLogger(app.get(PinoLogger));
   const appConfig = app.get(AppConfig);
 
-  const logger = new Logger('Bootstrap');
+  const logger = new Logger('API Bootstrap');
   app.use(
     compression({
       threshold: 512,
@@ -35,7 +35,7 @@ async function bootstrap() {
     maxAge: 3600, // Max cache age for preflight requests
   });
 
-app.useBodyParser('text');
+  app.useBodyParser('text');
 
   app.use(
     helmet({

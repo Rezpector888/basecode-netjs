@@ -1,9 +1,11 @@
 import { Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { LoggerModule } from 'nestjs-pino';
-import { AppConfig, NestConfigModule } from 'src/api/lib/config';
-import { PrismaModule } from 'src/api/lib/prisma';
-import { RosteringModule } from 'src/api/modules/rostering';
+import { BullModule } from '@nestjs/bull';
+import { BullService } from '@lib/services';
+import { AppConfig, NestConfigModule, RedisConfig } from '@lib/config';
+import { RosteringModule } from '@modules/rostering';
+import { PrismaModule } from '@lib/prisma';
 
 @Module({
   imports: [
@@ -111,6 +113,10 @@ import { RosteringModule } from 'src/api/modules/rostering';
           exclude: [{ method: RequestMethod.ALL, path: 'docs' }],
         };
       },
+    }),
+    BullModule.forRootAsync({
+      inject: [RedisConfig, AppConfig],
+      useClass: BullService,
     }),
     RosteringModule,
   ],

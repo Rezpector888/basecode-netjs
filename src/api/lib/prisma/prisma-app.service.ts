@@ -1,7 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaMssql } from '@prisma/adapter-mssql';
 import { DatabaseConfig } from 'src/api/lib/config';
-import { PrismaClient } from './generated/prisma/client';
+// import { PrismaClient } from './generated/prisma/client';
+import { PrismaClient } from 'src/prisma-generated/prisma-app/client';
+
 @Injectable()
 export class PrismaAppService extends PrismaClient {
   constructor(databaseConfig: DatabaseConfig) {

@@ -6,6 +6,7 @@
 /documentation
 /prisma/generated
 /src/api/lib/prisma/generated
+/src/prisma-generated/*
 # Logs
 logs
 *.log

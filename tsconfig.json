@@ -37,7 +37,8 @@
     "paths": {
       "@lib/*": ["src/api/lib/*"],
       "@common/*": ["src/api/common/*"],
-      "@modules/*": ["src/api/modules/*"]
+      "@modules/*": ["src/api/modules/*"],
+      "@prisma-generated/*": ["src/prisma-generated/*"]
     }
   },
   "exclude": ["node_modules", "dist"]

@@ -19,6 +19,10 @@
   "scripts": {
     "build": "prisma generate --schema=./prisma-app/schema.prisma && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "worker": "nest start  --entryFile worker/main",
+    "worker:dev": "prisma generate --schema=./prisma-app/schema.prisma && nest start --watch --entryFile worker/main",
+    "worker:debug": "nest start --debug --watch  --entryFile worker/main",
+    "worker:prod": "node dist/worker/main",
     "start": "nest start  --entryFile api/main",
     "start:dev": "prisma generate --schema=./prisma-app/schema.prisma && nest start --watch --entryFile api/main",
     "start:debug": "nest start --debug --watch  --entryFile api/main",
@@ -33,6 +37,7 @@
   },
   "dependencies": {
     "@itgorillaz/configify": "^4.0.1",
+    "@nestjs/bull": "^11.0.4",
     "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.9",
