@@ -11,5 +11,6 @@ async function bootstrap() {
   const logger = new Logger('Worker Bootstrap');
   logger.log(`==========================================================`);
   logger.log(`🚀 Worker is running`);
+  setInterval(() => {}, 1000);
 }
 bootstrap();
