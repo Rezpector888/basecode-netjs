@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    /* ===== Module & Target ===== */
+    "target": "es2024",                       
+    "module": "commonjs",                     
+    "moduleResolution": "node",                
+    "lib": ["es2024"],                 
+
+    /* ===== Output ===== */
+    "outDir": "./dist",
+    "declaration": false,                     
+    "sourceMap": true,                        
+    "removeComments": true,                   
+
+    /* ===== Decorators (NestJS) ===== */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    /* ===== Strict Mode ===== */
+    "strict": true,                           
+    "noImplicitAny": true,                   
+    "strictNullChecks": true,                 
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* ===== Modern JS Interop ===== */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    /* ===== Speed ===== */
+    "incremental": true,
+    "skipLibCheck": true,
+
+    /* ===== Path Alias ===== */
+    "baseUrl": "./",
+    "paths": {
+      "@lib/*": ["src/api/lib/*"],
+      "@common/*": ["src/api/common/*"],
+      "@modules/*": ["src/api/modules/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
