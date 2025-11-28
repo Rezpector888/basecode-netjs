@@ -1,6 +1,4 @@
-import { Processor } from "@nestjs/bull";
+import { Processor } from '@nestjs/bull';
 
 @Processor('notification')
-export class NoticationConsumer {
-
-}
+export class NoticationConsumer {}

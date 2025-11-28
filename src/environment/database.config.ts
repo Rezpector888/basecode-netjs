@@ -37,7 +37,7 @@ export class DatabaseConfig {
   @Value('DATABASE_SCHEMA')
   @IsString()
   @IsNotEmpty()
-  schema!: string;
+  schema: string = "dbo";
 
   @Value('DATABASE_TRUST_SERVER_CERTIFICATE', { parse: (value: any) => value === 'true' })
   @IsIn([true, false])

@@ -1,8 +1,5 @@
 import { AppConfig, RedisConfig } from '@environment';
-import {
-  BullRootModuleOptions,
-  SharedBullConfigurationFactory,
-} from '@nestjs/bull';
+import { BullRootModuleOptions, SharedBullConfigurationFactory } from '@nestjs/bull';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

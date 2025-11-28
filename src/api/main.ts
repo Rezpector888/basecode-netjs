@@ -47,7 +47,7 @@ async function bootstrap() {
       noSniff: true, // Prevent sniffing of MIME types
     }),
   );
-  // app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
+  app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
 
   app.useGlobalPipes(
     new ValidationPipe({

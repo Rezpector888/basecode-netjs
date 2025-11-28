@@ -1,1 +1,1 @@
-export * from './bull.service'
+export * from './bull.service';

@@ -1,11 +1,12 @@
 import { DatabaseConfig } from '@environment';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma-generated/prisma-app/client';
 import { PrismaMssql } from '@prisma/adapter-mssql';
 import { config } from 'mssql';
 
 @Injectable()
 export class PrismaAppService extends PrismaClient {
+  private logger: Logger = new Logger(PrismaAppService.name);
   constructor(databaseConfig: DatabaseConfig) {
     const sqlConfig: config = {
       user: databaseConfig.user,
@@ -19,11 +20,17 @@ export class PrismaAppService extends PrismaClient {
         idleTimeoutMillis: 30000,
       },
       options: {
-        encrypt: true, 
-        trustServerCertificate: databaseConfig.trustServerCertificate, 
+        encrypt: true,
+        trustServerCertificate: databaseConfig.trustServerCertificate,
       },
     };
-    const adapter = new PrismaMssql(sqlConfig, { schema: databaseConfig.schema });
+    const adapter = new PrismaMssql(sqlConfig, {
+      schema: databaseConfig.schema,
+      onConnectionError: (err) => {
+        this.logger.error('Database not connected');
+        this.logger.error(err);
+      },
+    });
     super({ adapter });
   }
 }
