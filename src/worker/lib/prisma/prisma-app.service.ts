@@ -19,8 +19,8 @@ export class PrismaAppService extends PrismaClient {
         idleTimeoutMillis: 30000,
       },
       options: {
-        encrypt: true, 
-        trustServerCertificate: databaseConfig.trustServerCertificate, 
+        encrypt: true,
+        trustServerCertificate: databaseConfig.trustServerCertificate,
       },
     };
     const adapter = new PrismaMssql(sqlConfig, { schema: databaseConfig.schema });

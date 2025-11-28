@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
-import { PrismaAppService } from 'src/api/lib/prisma';
 import { createPaginator, PaginateFunction } from 'prisma-pagination';
-import { PAGINATION_CONSTANTS } from 'src/api/common/constant';
-import { Prisma, schedules } from 'src/prisma-generated/prisma-app/client';
+import { PrismaAppService } from '@lib/prisma';
+import { PAGINATION_CONSTANTS } from '@common/constant';
+import { Prisma, schedules } from '@prisma-generated/prisma-app/client';
 
 @Injectable()
 export class SchedulesService {

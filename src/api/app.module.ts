@@ -3,14 +3,14 @@ import { AppController } from './app.controller';
 import { LoggerModule } from 'nestjs-pino';
 import { BullModule } from '@nestjs/bull';
 import { BullService } from '@lib/services';
-import { AppConfig, NestConfigModule, RedisConfig } from '@lib/config';
 import { RosteringModule } from '@modules/rostering';
 import { PrismaModule } from '@lib/prisma';
+import { AppConfig, EnvironmentModule, RedisConfig } from '@environment';
 
 @Module({
   imports: [
     PrismaModule,
-    NestConfigModule,
+    EnvironmentModule,
     LoggerModule.forRootAsync({
       inject: [AppConfig],
       useFactory: async (config: AppConfig) => {

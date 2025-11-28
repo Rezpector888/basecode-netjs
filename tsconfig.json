@@ -38,8 +38,11 @@
       "@lib/*": ["src/api/lib/*"],
       "@common/*": ["src/api/common/*"],
       "@modules/*": ["src/api/modules/*"],
-      "@prisma-generated/*": ["src/prisma-generated/*"]
+      "@prisma-generated/*": ["src/prisma-generated/*"],
+      "@worker-lib/*": ["src/worker/lib/*"],
+      "@worker-modules/*": ["src/worker/modules/*"],
+      "@environment": ["src/environment/index.ts"]
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "src/prisma-generated"]
 }

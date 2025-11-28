@@ -5,10 +5,10 @@ import { LoggerErrorInterceptor, Logger as PinoLogger } from 'nestjs-pino';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import compression from 'compression';
 import helmet from 'helmet';
-import { AppConfig } from 'src/api/lib/config';
 import { BigIntInterceptor, ResponseTransformInterceptor } from 'src/api/lib/interceptors';
 import { SwaggerSetup } from 'src/api/lib/services';
 import { NotFoundExceptionFilter } from 'src/api/lib/exceptions';
+import { AppConfig } from '@environment';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
@@ -47,7 +47,7 @@ async function bootstrap() {
       noSniff: true, // Prevent sniffing of MIME types
     }),
   );
-  app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
+  // app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
 
   app.useGlobalPipes(
     new ValidationPipe({
