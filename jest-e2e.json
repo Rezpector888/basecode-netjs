@@ -1,0 +1,19 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": "test",
+  "testEnvironment": "node",
+  "testRegex": ".e2e-spec.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "moduleNameMapper": {
+    "^src/(.*)$": "<rootDir>/../src/$1",
+      "^@lib/(.*)$": "<rootDir>/../src/api/lib/$1",
+      "^@common/(.*)$": "<rootDir>/../src/api/common/$1",
+      "^@modules/(.*)$": "<rootDir>/../src/api/modules/$1",
+      "^@prisma-generated/(.*)$": "<rootDir>/../src/prisma-generated/$1",
+      "^@worker-lib/(.*)$": "<rootDir>/../src/worker/lib/$1",
+      "^@worker-modules/(.*)$": "<rootDir>/../src/worker/modules/$1",
+      "^@environment": "<rootDir>/../src/environment/$1"
+    }
+}

@@ -10,6 +10,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter {
     response.status(404).json({
       status_code: 404,
       message: 'Page not found or invalid endpoint',
+      error: 'Not Found',
     });
   }
 }
