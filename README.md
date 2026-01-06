@@ -21,6 +21,7 @@ Open browser http://127.0.0.1:8080
 
 - Node (>= 24.0.0)
 - NPM (>= 11.0.0)
+- PNPM (>=)
 
 ### Installation
 
