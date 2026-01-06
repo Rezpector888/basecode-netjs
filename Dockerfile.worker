@@ -1,6 +1,6 @@
 FROM node:24-alpine AS builder
 WORKDIR /app
-RUN apk add --no-cache openssl-dev openssl zlib-dev
+RUN apk add --no-cache openssl-dev openssl
 COPY package*.json ./
 COPY prisma-app ./
 RUN npm ci
