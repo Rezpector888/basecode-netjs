@@ -19,4 +19,9 @@ export class RedisConfig {
   @IsNotEmpty()
   @IsString()
   password!: string;
+
+  @Value('REDIS_PREFIX')
+  @IsNotEmpty()
+  @IsString()
+  prefix!: string;
 }

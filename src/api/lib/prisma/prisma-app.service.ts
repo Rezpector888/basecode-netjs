@@ -1,5 +1,5 @@
 import { DatabaseConfig } from '@environment';
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { PrismaClient } from '@prisma-generated/prisma-app/client';
 import { PrismaMssql } from '@prisma/adapter-mssql';
 import { config } from 'mssql';
@@ -29,6 +29,7 @@ export class PrismaAppService extends PrismaClient {
       onConnectionError: (err) => {
         this.logger.error('Database not connected');
         this.logger.error(err);
+        throw new InternalServerErrorException()
       },
     });
     super({ adapter });
