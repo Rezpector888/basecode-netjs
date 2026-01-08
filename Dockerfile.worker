@@ -3,9 +3,8 @@ WORKDIR /app
 RUN apk add --no-cache openssl-dev openssl
 COPY package*.json ./
 COPY prisma-app ./
-RUN npm install -g pnpm
+RUN npm ci
 COPY . .
-RUN pnpm install --frozen-lockfile
 RUN npm run build
 RUN rm -rf dist/api
 
