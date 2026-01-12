@@ -5,10 +5,13 @@ import { LoggerErrorInterceptor, Logger as PinoLogger } from 'nestjs-pino';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import compression from 'compression';
 import helmet from 'helmet';
-import { BigIntInterceptor, ResponseTransformInterceptor } from 'src/api/lib/interceptors';
-import { SwaggerSetup } from 'src/api/lib/services';
-import { NotFoundExceptionFilter } from 'src/api/lib/exceptions';
 import { AppConfig } from '@environment';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { ReflectionService } from '@grpc/reflection';
+import { BigIntInterceptor, ResponseTransformInterceptor } from '@lib/interceptors';
+import { NotFoundExceptionFilter } from '@lib/exceptions';
+import { SwaggerSetup } from '@lib/services';
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
@@ -19,8 +22,20 @@ async function bootstrap() {
   app.set('query parser', 'extended');
   app.useLogger(app.get(PinoLogger));
   const appConfig = app.get(AppConfig);
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.GRPC,
+    options: {
+      url: `${appConfig.gprcHost}:${appConfig.port}`,
+      package: [],
+      protoPath: [],
+      gracefulShutdown: true,
+      onLoadPackageDefinition: appConfig.env.startsWith('prod') ? undefined : (pkg, server) => {
+        new ReflectionService(pkg, server);
+      }
+    }
 
-  const logger = new Logger('API Bootstrap');
+  })
+  const logger = new Logger(`${appConfig.name}`);
   app.use(
     compression({
       threshold: 512,
@@ -87,8 +102,12 @@ async function bootstrap() {
   if (appConfig.env != 'production') {
     SwaggerSetup(app, appConfig); // Setup Swagger for API documentation
   }
+
+  await app.startAllMicroservices()
   await app.listen(process.env.PORT ?? 3000);
   logger.log(`==========================================================`);
   logger.log(`🚀 Application is running on: ${appConfig.appUrl}`);
+  logger.log(`🚀 gPRC is running on: ${appConfig.gprcHost}:${appConfig.gprcPort}`);
+
 }
 bootstrap();

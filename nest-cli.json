@@ -4,6 +4,8 @@
   "compilerOptions": {
     "builder": "swc",
     "deleteOutDir": true,
-    "typeCheck": true
+    "typeCheck": true,
+    "watchAssets": true,
+    "assets": ["**/*.proto"]
   }
 }

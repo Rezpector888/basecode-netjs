@@ -1,5 +1,5 @@
 import { Configuration, Value } from '@itgorillaz/configify';
-import { IsIn, IsInt, IsNotEmpty, IsString } from 'class-validator';
+import { IsIn, IsInt, IsIP, IsNotEmpty, IsString } from 'class-validator';
 
 @Configuration()
 export class AppConfig {
@@ -29,4 +29,13 @@ export class AppConfig {
   @IsString()
   @IsNotEmpty()
   appUrl!: string;
+
+  @Value('GPRC_HOST')
+  @IsIP()
+  @IsString()
+  gprcHost!: string;
+
+  @Value('GPRC_PORT', { parse: (val: any) => parseInt(val)})
+  @IsInt()
+  gprcPort!: number;
 }
