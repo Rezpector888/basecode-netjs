@@ -1,6 +1,5 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { SchedulesModule } from '@modules/rostering';
 import { AppConfig } from '@environment';
 
 export const SwaggerSetup = (app: INestApplication, configApp: AppConfig): void => {
@@ -9,7 +8,6 @@ export const SwaggerSetup = (app: INestApplication, configApp: AppConfig): void 
     .setTitle(`API DOCUMENTATION ${appName}`)
     .setDescription(
       `This API documentation is generated using Swagger OpenAPI.</br>
-      For more details about Swagger, visit <a href="http://swagger.io" target="_blank">Swagger.io</a>.</br>
       To download the API specification in JSON format, click <a href="${configApp.appUrl}/swagger.json">here</a>.</br>
       To download the API specification in YAML format, click <a href="${configApp.appUrl}/swagger.yaml">here</a>.</br>
       `,
@@ -33,6 +31,18 @@ export const SwaggerSetup = (app: INestApplication, configApp: AppConfig): void 
       {
         status: 200,
         description: 'Ok',
+      },
+      {
+        status: 201,
+        description: 'Created',
+      },
+      {
+        status: 400,
+        description: 'Bad Request',
+      },
+      {
+        status: 403,
+        description: 'Forbidden',
       },
     )
     .build();

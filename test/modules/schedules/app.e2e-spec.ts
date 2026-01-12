@@ -16,7 +16,7 @@ describe('SchedulesController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.enableVersioning({ defaultVersion: '1', type: VersioningType.URI });
-    
+
     await app.init();
   });
 
@@ -33,7 +33,7 @@ describe('SchedulesController (e2e)', () => {
     return request(app.getHttpServer()).get('/v1/rostering/schedules').expect(200);
   });
 
-  it('')
+  it('');
   afterAll(async () => {
     const prisma = app.get(PrismaAppService);
     await prisma.$disconnect();

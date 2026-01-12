@@ -29,7 +29,7 @@ export class PrismaAppService extends PrismaClient {
       onConnectionError: (err) => {
         this.logger.error('Database not connected');
         this.logger.error(err);
-        throw new InternalServerErrorException()
+        throw new InternalServerErrorException();
       },
     });
     super({ adapter });

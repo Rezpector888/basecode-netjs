@@ -4,9 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class BullService implements SharedBullConfigurationFactory {
-  constructor(
-    private redisConfig: RedisConfig,
-  ) {}
+  constructor(private redisConfig: RedisConfig) {}
 
   async createSharedConfiguration(): Promise<BullRootModuleOptions> {
     return {

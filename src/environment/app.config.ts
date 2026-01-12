@@ -35,7 +35,7 @@ export class AppConfig {
   @IsString()
   gprcHost!: string;
 
-  @Value('GPRC_PORT', { parse: (val: any) => parseInt(val)})
+  @Value('GPRC_PORT', { parse: (val: any) => parseInt(val) })
   @IsInt()
   gprcPort!: number;
 }

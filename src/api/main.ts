@@ -29,12 +29,13 @@ async function bootstrap() {
       package: [],
       protoPath: [],
       gracefulShutdown: true,
-      onLoadPackageDefinition: appConfig.env.startsWith('prod') ? undefined : (pkg, server) => {
-        new ReflectionService(pkg, server);
-      }
-    }
-
-  })
+      onLoadPackageDefinition: appConfig.env.startsWith('prod')
+        ? undefined
+        : (pkg, server) => {
+            new ReflectionService(pkg, server);
+          },
+    },
+  });
   const logger = new Logger(`${appConfig.name}`);
   app.use(
     compression({
@@ -103,11 +104,10 @@ async function bootstrap() {
     SwaggerSetup(app, appConfig); // Setup Swagger for API documentation
   }
 
-  await app.startAllMicroservices()
+  await app.startAllMicroservices();
   await app.listen(process.env.PORT ?? 3000);
   logger.log(`==========================================================`);
   logger.log(`🚀 Application is running on: ${appConfig.appUrl}`);
   logger.log(`🚀 gPRC is running on: ${appConfig.gprcHost}:${appConfig.gprcPort}`);
-
 }
 bootstrap();

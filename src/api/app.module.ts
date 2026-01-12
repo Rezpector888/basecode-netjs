@@ -1,4 +1,4 @@
-import { Module, RequestMethod } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { LoggerModule } from 'nestjs-pino';
 import { BullModule } from '@nestjs/bull';
@@ -8,6 +8,7 @@ import { PrismaModule } from '@lib/prisma';
 import { AppConfig, EnvironmentModule, RedisConfig, ThrottlerConfig } from '@environment';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { SanitizeInputMiddleware } from '@lib/middlewares';
 
 @Module({
   imports: [
@@ -122,7 +123,7 @@ import { APP_GUARD } from '@nestjs/core';
     }),
     ThrottlerModule.forRootAsync({
       inject: [ThrottlerConfig],
-      useClass: ThrottlerConfigService
+      useClass: ThrottlerConfigService,
     }),
     RosteringModule,
   ],
@@ -130,8 +131,12 @@ import { APP_GUARD } from '@nestjs/core';
   providers: [
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard
-    }
-  ]
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(SanitizeInputMiddleware).forRoutes('{*sanitize}');
+  }
+}

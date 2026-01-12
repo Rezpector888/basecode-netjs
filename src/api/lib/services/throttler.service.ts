@@ -1,6 +1,6 @@
-import { ThrottlerConfig } from "@environment";
-import { Injectable } from "@nestjs/common";
-import { ThrottlerModuleOptions, ThrottlerOptionsFactory } from "@nestjs/throttler";
+import { ThrottlerConfig } from '@environment';
+import { Injectable } from '@nestjs/common';
+import { ThrottlerModuleOptions, ThrottlerOptionsFactory } from '@nestjs/throttler';
 
 @Injectable()
 export class ThrottlerConfigService implements ThrottlerOptionsFactory {

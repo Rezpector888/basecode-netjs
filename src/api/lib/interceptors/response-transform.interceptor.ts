@@ -20,28 +20,17 @@ export class ResponseTransformInterceptor<T> implements NestInterceptor<T, Respo
           const additional = response?.additional || null;
 
           const mappedResponse: any = {
-            status_code: context.switchToHttp().getResponse().statusCode,
+            statusCode: context.switchToHttp().getResponse().statusCode,
             message: response?.message,
             paginate: response?.meta,
             data: null,
           };
-          const mappedPaginate = {
-            total: response?.meta?.total,
-            last_page: response?.meta?.lastPage,
-            current_page: response?.meta?.currentPage,
-            per_page: response?.meta?.perPage,
-            prev: response?.meta?.prev,
-            next: response?.meta?.next,
-          };
           if (response?.message) delete response.message;
           if (response?.paginate) delete response.paginate;
-          if (response?.meta) {
-            mappedResponse.paginate = mappedPaginate;
-          }
           if (additional && Object.keys(additional).length > 0) {
             mappedResponse.additional = additional;
           }
-
+          if (Object.entries(mappedResponse.paginate).length == 1) delete mappedResponse.paginate;
           mappedResponse.data = response?.data ? response.data : response;
           if (Object.keys(mappedResponse.data ?? {}).length === 0) {
             mappedResponse.data = null;
