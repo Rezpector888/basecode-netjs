@@ -14,7 +14,7 @@ export class ThrottlerConfigService implements ThrottlerOptionsFactory {
           ttl: this.throttlerConfig.ttl,
         },
       ],
-      errorMessage(context, throttlerLimitDetail) {
+      errorMessage(_, throttlerLimitDetail) {
         return `Request limit exceeded. Please retry after ${throttlerLimitDetail.ttl} seconds.`;
       },
     };

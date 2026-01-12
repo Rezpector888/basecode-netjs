@@ -3,7 +3,7 @@ import { Response } from 'express';
 
 @Catch(PayloadTooLargeException)
 export class MulterExceptionFilter implements ExceptionFilter {
-  catch(exception: PayloadTooLargeException, host: ArgumentsHost) {
+  catch(_: PayloadTooLargeException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 

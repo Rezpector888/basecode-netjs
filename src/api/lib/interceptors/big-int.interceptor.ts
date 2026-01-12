@@ -5,7 +5,7 @@ import Stream from 'stream';
 
 @Injectable()
 export class BigIntInterceptor implements NestInterceptor {
-  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(_: ExecutionContext, next: CallHandler): Observable<any> {
     return next.handle().pipe(
       map((data) => {
         if (
